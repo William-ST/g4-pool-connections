@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.grupo4.demo.Util.getConenctionId;
-
 @Component
 public class MessageDAO extends DAO {
 
@@ -61,10 +59,13 @@ public class MessageDAO extends DAO {
              PreparedStatement ps = conn.prepareStatement(SELECT_ALL_SQL);
              ResultSet rs = ps.executeQuery()) {
 
+            /*
             // TEST
-            int connectionId = Util.getConenctionId(conn);
+            int connectionId =
             System.out.println("connectionId: "+ connectionId);
             // END TEST
+             */
+            Util.showConenctionId(conn);
 
             while (rs.next()) {
                 messages.add(new Message(

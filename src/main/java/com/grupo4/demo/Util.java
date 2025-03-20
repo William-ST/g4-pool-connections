@@ -13,7 +13,7 @@ public class Util {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                connectionId = rs.getInt(1);
+                int connectionId = rs.getInt(1);
                 System.out.println("ID de la conexión (PID): " + connectionId);
             }
         } catch (SQLException e) {
