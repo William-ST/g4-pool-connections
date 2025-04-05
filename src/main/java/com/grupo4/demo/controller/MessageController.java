@@ -42,13 +42,9 @@ public class MessageController {
 
     // READ (all)
     @GetMapping
-    @Async
-    public CompletableFuture<ResponseEntity<List<Message>>> getAllMessages() {
-        return CompletableFuture.supplyAsync(() -> {
-            List<Message> messages = messageService.findAll();
-            return ResponseEntity.ok(messages);
-        });
-
+    public ResponseEntity<List<Message>> getAllMessages() {
+        List<Message> messages = messageService.findAll();
+        return ResponseEntity.ok(messages);
     }
 
 }

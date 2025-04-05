@@ -31,19 +31,12 @@ public class ConnectionPool {
         }
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(props.getProperty("db.url"));
-        config.setUsername(props.getProperty("db.username"));
-        config.setPassword(props.getProperty("db.password"));
+        config.setJdbcUrl(props.getProperty("spring.datasource.url"));
+        config.setUsername(props.getProperty("spring.datasource.username"));
+        config.setPassword(props.getProperty("spring.datasource.password"));
         config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.poolSize", "10")));
 
         // Configuración adicional
-        /*
-        config.setAutoCommit(true);
-        config.setMinimumIdle(2);
-        config.setConnectionTimeout(30000); // 30 segundos
-        config.setIdleTimeout(600000); // 10 minutos
-        config.setMaxLifetime(1800000); // 30 minutos
-        */
         config.setAutoCommit(true);
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);

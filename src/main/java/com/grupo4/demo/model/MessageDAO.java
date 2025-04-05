@@ -76,7 +76,7 @@ public class MessageDAO extends DAO {
                 ));
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Error al listar mensajes: " + e.getMessage());
             throw new RuntimeException(e);
         }

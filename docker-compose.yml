@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    image: williamst/pool-springboot-demoapp:latest
+    container_name: app-pool
+    ports:
+      - "5001:5001"
+    environment:
+      SERVER_PORT: 5001
+    depends_on:
+      db-pool:
+        condition: service_healthy
+  db-pool:
+    image: postgres:15
+    container_name: postgres-db-pool
+    environment:
+      POSTGRES_DB: pool-connections-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Monta el script de inicialización
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "pool-connections-db" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+volumes:
+  postgres_data:
